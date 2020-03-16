@@ -5,8 +5,7 @@ const app = express();
 app.use(express.static("public"));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/mydb', { extended: true });
-
+mongoose.connect('mongodb://localhost/mydb1', { extended: true });
 
 app.get("/home", (req, res) => {
 console.log("Hello");
