@@ -1,15 +1,14 @@
 const express = require("express");
+const bodyParser = require('body-parser');
 
 const app = express();
-
-app.use(express.static("public"));
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/mydb1', { extended: true });
 
-app.get("/home", (req, res) => {
-console.log("Hello");
-res.send("Server Started");
-});
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(bodyParser.json())
+
 
 app.listen(3000);
