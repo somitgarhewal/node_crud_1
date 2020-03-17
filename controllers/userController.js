@@ -1,21 +1,21 @@
 var mongoose = require('mongoose');
 var userSchema = require('../models/userModel');
-
-const user = mongoose.model('user');
+const user = require('../models/userModel')
+// const user = mongoose.model('user');
 
 const userController = {
 
    getUser : async (req, res) => {
       const userData= await user.find({})
       console.log("person ", userData);
-      res.send({person: userData})
+      res.send({person: userData, success: true})
    },
    fetchUser : async (req, res) => {
       const data= await user.find({ '_id': req.params.id })
       console.log("id ", req.params.id);
 
       console.log("persons ", data);
-      res.send({person: data})
+      res.send({person: data, success: true})
    },
    addUser : (req, res) => {
       var userSchema = user(req.body);
@@ -25,29 +25,30 @@ const userController = {
            }
            else {
              console.log("success")
-             res.send({ data: userSchema })
+             res.send({ data: userSchema, success: true })
                }
         });
    },
    deleteUser : (req, res) => {
-      let id = req.params.id;
+      let {id} = req.params;
       user.remove({
          _id : id
-      },
+      }, 
       (err) => {
          if(err) 
             res.send(err);
          else
-            res.send("user successfully deleted");
+            res.send({message: "user successfully deleted", success: true});
       }
       )       
    },
    updateUser : (req, res) => { 
-      let id = req.params.id;
+      let {id} = req.params;
        var data = req.body;
+       console.log(data);
        user.findByIdAndUpdate(id, data, (err, user) => {
        if (err) throw err;
-       res.send('Successfully! User updated - ' + user.name);
+       res.send({message: 'Successfully! User updated - ' + data.name, success: true});
        })
    }
 }

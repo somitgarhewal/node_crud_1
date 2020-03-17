@@ -7,4 +7,6 @@ var userSchema = new Schema({
     gender: {type : String}
 });
 
-mongoose.model('user', userSchema)
+const user = mongoose.model('user', userSchema)
+
+module.exports = user;
