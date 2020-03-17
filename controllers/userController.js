@@ -28,6 +28,19 @@ const userController = {
              res.send({ data: userSchema })
                }
         });
+   },
+   deleteUser : (req, res) => {
+      let id = req.params.id;
+      user.remove({
+         _id : id
+      },
+      (err) => {
+         if(err) 
+            res.send(err);
+         else
+            res.send("user successfully deleted");
+      }
+      )       
    }
 }
 
