@@ -41,6 +41,14 @@ const userController = {
             res.send("user successfully deleted");
       }
       )       
+   },
+   updateUser : (req, res) => { 
+      let id = req.params.id;
+       var data = req.body;
+       user.findByIdAndUpdate(id, data, (err, user) => {
+       if (err) throw err;
+       res.send('Successfully! User updated - ' + user.name);
+       })
    }
 }
 
