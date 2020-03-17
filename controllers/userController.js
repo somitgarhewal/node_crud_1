@@ -16,6 +16,18 @@ const userController = {
 
       console.log("persons ", data);
       res.send({person: data})
+   },
+   addUser : (req, res) => {
+      var userSchema = user(req.body);
+         userSchema.save((err, users) => {
+           if(err) {
+               console.log("err", err)
+           }
+           else {
+             console.log("success")
+             res.send({ data: userSchema })
+               }
+        });
    }
 }
 
